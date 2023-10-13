@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Validation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="menu-container">
+      <div id="email" class="menu-item">Email</div>
+      <div id="phone" class="menu-item">Phone</div>
+      <div id="postcode" class="menu-item">Post Code</div>
+    </div>
+    <div id="validate-form">
+      <div class="email-form">
+        <h2>Validate your Email</h2>
+        <input
+          id="email-input"
+          type="text"
+          name="email"
+          placeholder="Enter an Email"
+          required
+        />
+        <button id="emailBtn" class="btn">Validate Email</button>
+      </div>
+      <div class="phone-form">
+        <h2>Validate your Phone</h2>
+        <input
+          id="phone-input"
+          type="text"
+          name="phone"
+          required
+          placeholder="Enter a Phone"
+        />
+        <button id="phoneBtn" class="btn">Validate Phone</button>
+      </div>
+      <div class="postcode-form">
+        <h2>Validate your Post Code</h2>
+        <input
+          id="postcode-input"
+          type="number"
+          name="postcode"
+          required
+          placeholder="Enter a Post Code"
+        />
+        <button id="postcodeBtn" class="btn">Validate PostCode</button>
+      </div>
+    </div>
+    <script>
+      let email = document.querySelector("#email");
+      let phone = document.querySelector("#phone");
+      let postcode = document.querySelector("#postcode");
+      let emailForm = document.querySelector(".email-form");
+      let phoneForm = document.querySelector(".phone-form");
+      let postcodeForm = document.querySelector(".postcode-form");
+      let emailBtn = document.querySelector("#emailBtn");
+      let phoneBtn = document.querySelector("#phoneBtn");
+      let postcodeBtn = document.querySelector("#postcodeBtn");
+      email.addEventListener("click", () => {
+        emailForm.style.display = "block";
+        phoneForm.style.display = "none";
+        postcodeForm.style.display = "none";
+      });
+      phone.addEventListener("click", () => {
+        phoneForm.style.display = "block";
+        emailForm.style.display = "none";
+        postcodeForm.style.display = "none";
+      });
+      postcode.addEventListener("click", () => {
+        postcodeForm.style.display = "block";
+        emailForm.style.display = "none";
+        phoneForm.style.display = "none";
+      });
+
+      emailBtn.addEventListener("click", () => {
+        let email = document.getElementById("email-input");
+        let isValidEmail = validateEmail(email.value);
+        if (isValidEmail) {
+          email.value = "";
+          alert("The email is valid");
+        } else {
+          alert("The email is invalid");
+        }
+      });
+      phoneBtn.addEventListener("click", () => {
+        let phone = document.getElementById("phone-input");
+        let isValidPhone = validatePhone(phone.value);
+        if (isValidPhone) {
+          phone.value = "";
+          alert("The phoneNo is valid");
+        } else {
+          alert("The phoneNo is invalid");
+        }
+      });
+      postcodeBtn.addEventListener("click", () => {
+        let postcode = document.getElementById("postcode-input");
+        let isValidPostcode = validatePostcode(postcode.value);
+        if (isValidPostcode) {
+          postcode.value = "";
+          alert("The post code is valid");
+        } else {
+          alert("The post code is invalid");
+        }
+      });
+
+      function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      function validatePhone(phone) {
+        const phoneRegex = /(^(\+88|0088)?(01){1}[3456789]{1}(\d){8})$/;
+        return phoneRegex.test(phone);
+      }
+      function validatePostcode(postcode) {
+        const postcodeRegex = /^\d{4}$/;
+        return postcodeRegex.test(postcode);
+      }
+    </script>
+  </body>
+</html>
